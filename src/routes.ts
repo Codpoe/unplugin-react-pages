@@ -16,6 +16,7 @@ export function generateRoutes(pages: Record<string, Page>): Route[] {
     const route: Route = {
       path: page.routePath,
       component: page.filePath,
+      exact: page.isLayout ? false : true,
       children: page.isLayout ? [] : undefined,
     };
 

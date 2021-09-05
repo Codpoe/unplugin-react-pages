@@ -3,25 +3,30 @@ import { resolveOptions } from './options';
 import { PagesService } from './pages';
 import { generateRoutes } from './routes';
 import { generateClientCode } from './client';
-import { MODULE_IDS, MODULE_ID_VIRTUAL } from './constants';
+import { REQUEST_IDS, MODULE_ID } from './constants';
 import { Route, UserOptions } from './types';
+import { appendPluginId } from './utils';
 
 const reactPagesPlugin = createUnplugin<UserOptions>((userOptions = {}) => {
   let options = resolveOptions(userOptions);
   let generatedRoutes: Route[] | null = null;
 
-  const pagesService = new PagesService(options, () => {
-    generatedRoutes = [];
+  const finalModuleId = appendPluginId(MODULE_ID, options.id);
+
+  const pagesService = new PagesService(options, finalModuleId, () => {
+    generatedRoutes = null;
   });
 
   return {
-    name: 'unplugin-react-pages',
+    name: appendPluginId('unplugin-react-pages', options.id),
     enforce: 'pre',
     resolveId(id) {
-      return MODULE_IDS.includes(id) ? MODULE_ID_VIRTUAL : null;
+      return REQUEST_IDS.some(x => id === appendPluginId(x, options.id))
+        ? finalModuleId
+        : null;
     },
     async load(id) {
-      if (id !== MODULE_ID_VIRTUAL) {
+      if (id !== finalModuleId) {
         return;
       }
 

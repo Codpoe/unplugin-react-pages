@@ -1,9 +1,8 @@
 import path from 'path';
 import chokidar, { FSWatcher } from 'chokidar';
 import { ViteDevServer } from 'vite';
-import { Page, ResolvedOptions } from './types';
 import { slash } from './utils';
-import { MODULE_ID_VIRTUAL } from './constants';
+import { Page, ResolvedOptions } from './types';
 
 function resolveRoutePath(
   baseRoutePath: string,
@@ -37,9 +36,12 @@ export class PagesService {
   private watchers: FSWatcher[] = [];
   private pages: Record<string, Page> = {};
   private server: ViteDevServer | null = null;
-  private layouts: Record<string, Page> = {};
 
-  constructor(private options: ResolvedOptions, private onReload: () => void) {}
+  constructor(
+    private options: ResolvedOptions,
+    private moduleId: string,
+    private onReload: () => void
+  ) {}
 
   init() {
     if (this.initPromise) {
@@ -109,17 +111,18 @@ export class PagesService {
   }
 
   reload() {
+    this.onReload();
+
     if (!this.server) {
       return;
     }
 
-    const module = this.server.moduleGraph.getModuleById(MODULE_ID_VIRTUAL);
+    const module = this.server.moduleGraph.getModuleById(this.moduleId);
 
     if (module) {
       this.server.moduleGraph.invalidateModule(module);
     }
 
-    this.onReload();
     this.server.ws.send({ type: 'full-reload' });
   }
 

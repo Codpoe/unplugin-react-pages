@@ -1,10 +1,11 @@
-export type ImportMode = 'sync' | 'async';
+export type ImportMode = 'sync' | 'async' | 'preserve';
 
-export type ImportModeResolveFn = (filepath: string) => ImportMode;
+export type ImportModeResolveFn = (filePath: string) => ImportMode;
 
 export interface Route {
   path: string;
   component: any;
+  exact: boolean;
   children?: Route[];
 }
 
@@ -34,6 +35,12 @@ export type UserPagesDir = string | Record<string, string | UserPagesDirObj>;
 export type ResolvedPagesDir = Record<string, Required<UserPagesDirObj>>;
 
 export interface UserOptions {
+  /**
+   * Commonly used in multi-page application for differentiate plugin.
+   * For example, if the id is set to 'admin',
+   * the application needs to get the routes from 'virtual:generated-pages/admin'
+   */
+  id?: string;
   /**
    * Relative path to the directory to search for page components.
    * @default 'src/pages'

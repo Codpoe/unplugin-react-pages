@@ -1,5 +1,5 @@
 {
-  "name": "vite-plugin-react-pages2",
+  "name": "unplugin-react-pages",
   "version": "0.1.0",
   "description": "File system base router plugin for vite and react",
   "main": "dist/index.js",
@@ -11,14 +11,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Codpoe/vite-plugin-react-pages2.git"
+    "url": "git+https://github.com/Codpoe/unplugin-react-pages.git"
   },
   "author": "codpoe <codpoe.me@gmail.com>",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/Codpoe/vite-plugin-react-pages2/issues"
+    "url": "https://github.com/Codpoe/unplugin-react-pages/issues"
   },
-  "homepage": "https://github.com/Codpoe/vite-plugin-react-pages2#readme",
+  "homepage": "https://github.com/Codpoe/unplugin-react-pages#readme",
   "lint-staged": {
     "*.{js,jsx,ts,tsx}": [
       "eslint --fix",

@@ -58,6 +58,7 @@ export function resolveOptions(
   base = '/'
 ): ResolvedOptions {
   const {
+    id = '',
     pagesDir = 'src/pages',
     ignored = [],
     importMode = 'async',
@@ -68,6 +69,7 @@ export function resolveOptions(
   } = userOptions;
 
   return {
+    id,
     root,
     pagesDir: resolvePagesDir(pagesDir, root, base),
     ignored,
