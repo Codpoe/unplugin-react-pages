@@ -7,7 +7,8 @@
   "exports": {
     ".": "./dist/index.js",
     "./*": "./*",
-    "./vite": "./dist/vite.js"
+    "./vite": "./dist/vite.js",
+    "./webpack": "./dist/webpack.js"
   },
   "repository": {
     "type": "git",
@@ -32,7 +33,7 @@
   },
   "dependencies": {
     "chokidar": "^3.5.2",
-    "unplugin": "^0.2.4"
+    "unplugin": "^0.2.11"
   },
   "devDependencies": {
     "@types/node": "^16.7.6",
@@ -44,7 +45,7 @@
     "lint-staged": "^11.1.2",
     "prettier": "^2.3.2",
     "rimraf": "^3.0.2",
-    "typescript": "^4.4.2",
+    "typescript": "^4.4.3",
     "vite": "^2.5.1"
   }
 }

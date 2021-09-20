@@ -26,7 +26,10 @@ const reactPagesPlugin = createUnplugin<UserOptions>((userOptions = {}) => {
         : null;
     },
     async load(id) {
-      if (id !== finalModuleId) {
+      if (
+        REQUEST_IDS.every(x => id !== appendPluginId(x, options.id)) &&
+        id !== finalModuleId
+      ) {
         return;
       }
 
@@ -62,7 +65,7 @@ const reactPagesPlugin = createUnplugin<UserOptions>((userOptions = {}) => {
         await pagesService.close();
       },
     },
-    // TODO: support webpack
+    // TODO: optimize for webpack
     // webpack: (compiler) => {},
   };
 });

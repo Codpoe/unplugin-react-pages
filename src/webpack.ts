@@ -1,3 +1,3 @@
 import reactPagesPlugin from '.';
 
-export = reactPagesPlugin.vite;
+export = reactPagesPlugin.webpack;
